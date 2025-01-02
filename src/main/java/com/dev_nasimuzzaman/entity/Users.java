@@ -2,7 +2,6 @@ package com.dev_nasimuzzaman.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import org.hibernate.usertype.UserType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -19,7 +18,7 @@ public class Users {
     private String email;
 
     @NotEmpty
-    private String password;
+    private  String password;
 
     private boolean isActive;
 
@@ -27,7 +26,7 @@ public class Users {
     private Date registrationDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeTd")
+    @JoinColumn(name = "userTypeId",referencedColumnName = "userTypeId")
     private UsersType userTypeId;
 
     public Users() {

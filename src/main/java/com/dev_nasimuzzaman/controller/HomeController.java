@@ -1,4 +1,4 @@
-package com.dev_nasimuzzaman.jobportal.controller;
+package com.dev_nasimuzzaman.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
