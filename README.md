@@ -74,8 +74,5 @@ Contributions are welcome! To contribute:
    
 ### Please ensure your code follows the project's coding standards and includes appropriate tests.
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
 ## Contact
 For questions or feedback, please contact nasimuzzaman98@gmail.com
