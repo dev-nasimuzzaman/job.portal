@@ -34,3 +34,48 @@ Job Portal is a web application designed to connect job seekers with employers, 
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/dev-nasimuzzaman/job.portal.git
+
+2. **Navigate to the Project Directory**:
+   ```bash
+   cd job.portal
+
+3. **Build the Project**:
+   ```bash
+   mvn clean install
+   
+4. Run the Application:
+   ```bash
+   mvn spring-boot:run
+  
+5. Access the Application: Open your browser and navigate to http://localhost:8080.
+
+## Usage
+
+### For Job Seekers:
+Register or log in to your account.
+Search for jobs using the search bar and filters.
+Click on a job listing to view details.
+Apply for the job by clicking the "Apply" button.
+
+### For Employers:
+Register or log in to your employer account.
+Post new job listings through the dashboard.
+Review applications submitted for your job listings.
+Update the status of applications as the recruitment process progresses.
+
+## Contributing
+Contributions are welcome! To contribute:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Make your changes and commit them with descriptive messages.
+4. Push your changes to your fork.
+5. Submit a pull request.
+   
+### Please ensure your code follows the project's coding standards and includes appropriate tests.
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Contact
+For questions or feedback, please contact nasimuzzaman98@gmail.com
