@@ -32,3 +32,4 @@ public class JobPostActivityController {
         return "dashboard";
     }
 }
+
