@@ -17,9 +17,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class UsersService {
+
     private final UsersRepository usersRepository;
     private final JobSeekerProfileRepository jobSeekerProfileRepository;
     private final RecruiterProfileRepository recruiterProfileRepository;
@@ -32,16 +34,18 @@ public class UsersService {
         this.recruiterProfileRepository = recruiterProfileRepository;
         this.passwordEncoder = passwordEncoder;
     }
-    public Users addNew(Users users){
+
+    public Users addNew(Users users) {
         users.setActive(true);
         users.setRegistrationDate(new Date(System.currentTimeMillis()));
         users.setPassword(passwordEncoder.encode(users.getPassword()));
         Users savedUser = usersRepository.save(users);
         int userTypeId = users.getUserTypeId().getUserTypeId();
-        if (userTypeId == 1){
+
+        if (userTypeId == 1) {
             recruiterProfileRepository.save(new RecruiterProfile(savedUser));
         }
-        else{
+        else {
             jobSeekerProfileRepository.save(new JobSeekerProfile(savedUser));
         }
 
@@ -49,16 +53,16 @@ public class UsersService {
     }
 
     public Object getCurrentUserProfile() {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(!(authentication instanceof AnonymousAuthenticationToken)){
+
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
-            Users users = usersRepository.findByEmail(username).orElseThrow(()-> new
-                    UsernameNotFoundException("Could not found" + "user"));
+            Users users = usersRepository.findByEmail(username).orElseThrow(()-> new UsernameNotFoundException("Could not found " + "user"));
             int userId = users.getUserId();
-            if(authentication.getAuthorities().contains(new SimpleGrantedAuthority
-                    ("Recruiter"))){
-            RecruiterProfile recruiterProfile = recruiterProfileRepository.findById(userId).orElse(new RecruiterProfile());
-            return recruiterProfile;
+            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("Recruiter"))) {
+                RecruiterProfile recruiterProfile = recruiterProfileRepository.findById(userId).orElse(new RecruiterProfile());
+                return recruiterProfile;
             } else {
                 JobSeekerProfile jobSeekerProfile = jobSeekerProfileRepository.findById(userId).orElse(new JobSeekerProfile());
                 return jobSeekerProfile;
@@ -67,5 +71,10 @@ public class UsersService {
 
         return null;
     }
+
+    public Optional<Users> getUserByEmail(String email) {
+        return usersRepository.findByEmail(email);
+    }
+
 }
 

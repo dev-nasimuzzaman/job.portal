@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class JobPostActivityController {
+
     private final UsersService usersService;
 
     @Autowired
@@ -18,17 +19,19 @@ public class JobPostActivityController {
         this.usersService = usersService;
     }
 
-    @GetMapping("/dashboard")
-    public String searchJobs(Model model){
+    @GetMapping("/dashboard/")
+    public String searchJobs(Model model) {
 
         Object currentUserProfile = usersService.getCurrentUserProfile();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if(!(authentication instanceof AnonymousAuthenticationToken)){
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUsername = authentication.getName();
             model.addAttribute("username", currentUsername);
         }
+
         model.addAttribute("user", currentUserProfile);
+
         return "dashboard";
     }
 }

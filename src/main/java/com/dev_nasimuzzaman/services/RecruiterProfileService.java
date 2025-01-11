@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Service
 public class RecruiterProfileService {
+
     private final RecruiterProfileRepository recruiterProfileRepository;
 
     @Autowired
@@ -16,7 +17,7 @@ public class RecruiterProfileService {
         this.recruiterProfileRepository = recruiterProfileRepository;
     }
 
-    public Optional<RecruiterProfile> getOne(Integer id){
+    public Optional<RecruiterProfile> getOne(Integer id) {
         return recruiterProfileRepository.findById(id);
     }
 }

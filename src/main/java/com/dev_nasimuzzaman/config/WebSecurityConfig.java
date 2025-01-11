@@ -19,8 +19,6 @@ public class WebSecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
-
-
     @Autowired
     public WebSecurityConfig(CustomUserDetailsService customUserDetailsService, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
         this.customUserDetailsService = customUserDetailsService;
@@ -47,31 +45,33 @@ public class WebSecurityConfig {
 
         http.authenticationProvider(authenticationProvider());
 
-        http.authorizeHttpRequests(auth->{
+        http.authorizeHttpRequests(auth -> {
             auth.requestMatchers(publicUrl).permitAll();
             auth.anyRequest().authenticated();
         });
 
         http.formLogin(form->form.loginPage("/login").permitAll()
-                .successHandler(customAuthenticationSuccessHandler))
-                .logout(logout->{
+                        .successHandler(customAuthenticationSuccessHandler))
+                .logout(logout-> {
                     logout.logoutUrl("/logout");
                     logout.logoutSuccessUrl("/");
-                }).cors(Customizer.withDefaults()).csrf(csrf->csrf.disable());
+                }).cors(Customizer.withDefaults())
+                .csrf(csrf->csrf.disable());
 
         return http.build();
     }
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
+
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         authenticationProvider.setUserDetailsService(customUserDetailsService);
         return authenticationProvider;
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }

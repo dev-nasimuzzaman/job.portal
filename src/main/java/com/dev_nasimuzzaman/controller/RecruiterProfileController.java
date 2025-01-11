@@ -28,17 +28,21 @@ public class RecruiterProfileController {
     }
 
     @GetMapping("/")
-    public String recruiterProfile(Model model){
-       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-       if (!(authentication instanceof AnonymousAuthenticationToken)) {
+    public String recruiterProfile(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUsername = authentication.getName();
-           Users users = usersRepository.findByEmail(currentUsername).orElseThrow(()->new UsernameNotFoundException("Could not found user"));
-           Optional<RecruiterProfile> recruiterProfile = recruiterProfileService.getOne(users.getUserId());
+            Users users = usersRepository.findByEmail(currentUsername).orElseThrow(() -> new UsernameNotFoundException("Could not " + "found user"));
+            Optional<RecruiterProfile> recruiterProfile = recruiterProfileService.getOne(users.getUserId());
 
-           if(!recruiterProfile.isEmpty())
-               model.addAttribute("profile",recruiterProfile.get());
+            if (!recruiterProfile.isEmpty())
+                model.addAttribute("profile", recruiterProfile.get());
 
-       }
-       return "recruiter_profile";
+        }
+
+        return "recruiter_profile";
     }
 }
+

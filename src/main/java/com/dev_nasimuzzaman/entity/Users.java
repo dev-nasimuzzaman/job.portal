@@ -18,15 +18,15 @@ public class Users {
     private String email;
 
     @NotEmpty
-    private  String password;
+    private String password;
 
     private boolean isActive;
 
-    @DateTimeFormat(pattern = "dd-MM-yyy")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date registrationDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userTypeId",referencedColumnName = "userTypeId")
+    @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
     private UsersType userTypeId;
 
     public Users() {

@@ -7,8 +7,9 @@ import java.util.List;
 @Entity
 @Table(name = "users_type")
 public class UsersType {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userTypeId;
 
     private String userTypeName;
@@ -54,7 +55,7 @@ public class UsersType {
         return "UsersType{" +
                 "userTypeId=" + userTypeId +
                 ", userTypeName='" + userTypeName + '\'' +
-                ", users=" + users +
                 '}';
     }
 }
+
